@@ -37,3 +37,5 @@ function InvForm(props) {
     </>
   )
 }
+
+export default InvForm;

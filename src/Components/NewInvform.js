@@ -8,45 +8,46 @@ function NewInvForm(props) {
     event.preventDefault();
     props.onNewInvCreation({
       candy: event.target.candy.value,
-      price: event.target.price.value,
+      price: parseInt(event.target.price.value),
       description: event.target.description.value,
+      quantity: parseInt(event.target.quantity.value),
       id: v4()
     });
   }
 
   return (
     <React.Fragment>
-    <form onSubmit={handleNewFormSubmission}>
-      <input 
-      type="text"
-      name="candy"
-      placeholder="CANDY"
-      required />
-      <br />
-      <input 
-      type="text"
-      name="price"
-      placeholder="PRICE"
-      required />
-      <br />
-      <input 
-      type="text"
-      name="description"
-      placeholder="DESCRIPTION"
-      required />
-      <br />
-      <label for="quantity">QUANTITY: </label>
-      <input
-      type="number"
-      name="quantity"
-      min="0"
-      max="130"
-      defaultValue="130"
-      placeholder="QUANTITY"
-      required />
-      <br />
-      <button type ="submit">AWW YISS</button>
-    </form>
+      <form onSubmit={handleNewFormSubmission}>
+        <input
+          type="text"
+          name="candy"
+          placeholder="CANDY"
+          required />
+        <br />
+        <input
+          type="nubers"
+          name="price"
+          placeholder="PRICE"
+          required />
+        <br />
+        <input
+          type="text"
+          name="description"
+          placeholder="DESCRIPTION"
+          required />
+        <br />
+        <label htmlFor="quantity">QUANTITY: </label>
+        <input
+          type="number"
+          name="quantity"
+          min="0"
+          max="130"
+          defaultValue="130"
+          placeholder="QUANTITY"
+          required />
+        <br />
+        <button type="submit">submit</button>
+      </form>
     </React.Fragment>
   );
 }
