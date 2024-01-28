@@ -98,7 +98,7 @@ class InvControl extends React.Component {
       onClickingEdit={this.handleEditClick} />
       buttonText = "Go back to candy list"
     } else if (this.state.editing) {
-      currentlyVisibleState = <EditCandyForm tea={this.state.selectedCandy} onCandyTea={this.handleEditingCandyInList} />
+      currentlyVisibleState = <EditCandyForm candy={this.state.selectedCandy} onEditCandy={this.handleEditingCandyInList} />
         buttonText = "Return to candy list";
     } else {
       currentlyVisibleState = <InvList onCandySelection={this.handleSelectingCandy} invList={this.state.mainInvList} />

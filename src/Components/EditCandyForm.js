@@ -36,7 +36,7 @@ function EditCandyForm (props) {
 
 EditCandyForm.propTypes = {
   onEditCandy: PropTypes.func,
-  tea: PropTypes.object
+  Candy: PropTypes.object
 };
 
 export default EditCandyForm;

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 function CandyDetail(props) {
-  console.log(props)
+
   return (
     <React.Fragment>
       <h1>Candy Name: {props.selectedCandy.candy}</h1>
@@ -19,6 +19,6 @@ function CandyDetail(props) {
 CandyDetail.propTypes = {
   selectedCandy: PropTypes.object.isRequired,
   onClickingEdit: PropTypes.func
-}
+};
 
 export default CandyDetail;
