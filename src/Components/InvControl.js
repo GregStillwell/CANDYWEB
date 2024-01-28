@@ -32,14 +32,30 @@ class InvControl extends React.Component {
     }));
   }
 
-  handleEditClick = () => {
-    this.setState({editing:true});
-  }
+  // handleEditClick = () => {
+  //   this.setState({editing:true});
+  // }
 
   handleSelectingCandy = (id) => {
     const selectedCandy = this.state.mainInvList.filter(candy => candy.id === id)[0]
     this.setState({selectedCandy: selectedCandy })
   }
+
+  handleSaleClick = (id) => {
+    const candySold = this.state.mainCandyList.filter(candy => candy.id === id)[0];
+    if (candySold.quantity > 0) {
+      candySold.quantity -= 1;
+
+      const newMainCandyList = this.state.mainCandyList
+        .filter(candy => candy.id !== candySold.id)
+        .concat(candySold);
+
+      this.setState({
+        mainCandyList: newMainCandyList,
+        selectedCandy: candySold
+      });
+     }
+    }
 
   handleClick = () => {
     if (this.state.selectedCandy != null) {
@@ -65,26 +81,6 @@ class InvControl extends React.Component {
       selectedCandy: null
     });
   }
-  // render(){
-  //   let currentlyVisibleState = null;
-  //   let buttonText = null;
-  //   if (this.state.formVisibleOnPage) {
-  //     currentlyVisibleState = <NewInvForm onNewInvCreation={this.handleAddingNewInvToList} />
-  //     buttonText="Candy";
-  //   } else {
-  //     currentlyVisibleState = <InvList invList={this.state.mainInvList} />
-  //     buttonText="More candy";
-  //   }
-  //   return (
-  //     <React.Fragment>
-  //       <div className="content">
-  //         <p></p>
-  //         {currentlyVisibleState}
-  //         <button onClick={this.handleClick}>{buttonText}</button>
-  //       </div>
-  //     </React.Fragment>
-  //   );
-  // }
 
   render() {
     let currentlyVisibleState = null;
@@ -95,11 +91,12 @@ class InvControl extends React.Component {
       buttonText = "Go back to candy list"
     } else if (this.state.selectedCandy != null) {
       currentlyVisibleState = <CandyDetail selectedCandy={this.state.selectedCandy}
-      onClickingEdit={this.handleEditClick} />
-      buttonText = "Go back to candy list"
-    } else if (this.state.editing) {
-      currentlyVisibleState = <EditCandyForm candy={this.state.selectedCandy} onEditCandy={this.handleEditingCandyInList} />
-        buttonText = "Return to candy list";
+      onClickingEdit={this.handleEditClick}
+      onClickingSale={this.handleSaleClick} />
+      buttonText = "Go back to candy list";
+    // } else if (this.state.editing) {
+    //   currentlyVisibleState = <EditCandyForm candy={this.state.selectedCandy} onEditCandy={this.handleEditingCandyInList} />
+    //     buttonText = "Return to candy list";
     } else {
       currentlyVisibleState = <InvList onCandySelection={this.handleSelectingCandy} invList={this.state.mainInvList} />
       buttonText = "Add new candy"
@@ -107,9 +104,10 @@ class InvControl extends React.Component {
      
 
     return (
-      <>
+      <><React.Fragment>
         {currentlyVisibleState}
         <button onClick={this.handleClick}>{buttonText}</button>
+        </React.Fragment>
       </>
     );
   
