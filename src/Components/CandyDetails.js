@@ -10,7 +10,7 @@ function CandyDetail(props) {
       <p>Candy Description: {props.selectedCandy.description}</p>
       <p>Quantity Remaining: {props.selectedCandy.quantity}</p>
       <button>Edit Candy Details</button>
-      {/* users should be able to "sell" a candy and see quantity decrease but not go below 0 */}
+      <button onClick={onClickingEdit}>Edit Candy</button>
       <button>Sell Candy </button> 
     </React.Fragment>
   );
@@ -18,6 +18,7 @@ function CandyDetail(props) {
 
 CandyDetail.propTypes = {
   selectedCandy: PropTypes.object.isRequired,
+  onClickingEdit: PropTypes.func
 }
 
 export default CandyDetail;
