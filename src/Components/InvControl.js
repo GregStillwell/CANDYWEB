@@ -4,7 +4,7 @@ import InvList from "./InvList";
 import NewInvForm from "./NewInvForm";
 import InvForm from "./InvForm";
 import CandyDetail from "./CandyDetails";
-import EditCandyForm from './EditTeaForm';
+import EditCandyForm from './EditCandyForm';
 
 class InvControl extends React.Component {
 
@@ -32,13 +32,27 @@ class InvControl extends React.Component {
     }));
   }
 
+  handleEditClick = () => {
+    this.setState({editing:true});
+  }
+
   handleSelectingCandy = (id) => {
     const selectedCandy = this.state.mainInvList.filter(candy => candy.id === id)[0]
     this.setState({selectedCandy: selectedCandy })
   }
 
-  handleEditClick = () => {
-    this.setState({editing:true});
+  handleClick = () => {
+    if (this.state.selectedCandy != null) {
+      this.setState({
+        formVisibleOnPage: false,
+        selectedCandy: null,
+        editing: false
+      });
+    } else {
+      this.setState(prevState => ({
+        formVisibleOnPage: !prevState.formVisibleOnPage,
+      }));
+    }
   }
 
   handleEditingCandyInList = (candyToEdit) => {
@@ -80,7 +94,8 @@ class InvControl extends React.Component {
       currentlyVisibleState = <NewInvForm onNewInvCreation={this.handleAddingNewInvToList} />
       buttonText = "Go back to candy list"
     } else if (this.state.selectedCandy != null) {
-      currentlyVisibleState = <CandyDetail selectedCandy={this.state.selectedCandy} />
+      currentlyVisibleState = <CandyDetail selectedCandy={this.state.selectedCandy}
+      onClickingEdit={this.handleEditClick} />
       buttonText = "Go back to candy list"
     } else if (this.state.editing) {
       currentlyVisibleState = <EditCandyForm tea={this.state.selectedCandy} onCandyTea={this.handleEditingCandyInList} />
@@ -98,8 +113,7 @@ class InvControl extends React.Component {
       </>
     );
   
-  }
-
+    }
 }
 
 export default InvControl;

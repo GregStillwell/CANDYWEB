@@ -25,7 +25,7 @@ function NewInvForm(props) {
           required />
         <br />
         <input
-          type="nubers"
+          type="numbers"
           name="price"
           placeholder="PRICE"
           required />
