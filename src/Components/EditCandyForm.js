@@ -1,15 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function EditCandyForm (props) {
+function EditCandyForm(props) {
   const { candy } = props;
 
   function handleEditCandyFormSubmission(event) {
     event.preventDefault();
     props.onEditCandy({
-      name: event.target.name.value,
-      price: event.target.price.value,
+      candy: event.target.candy.value,
+      price: parseInt(event.target.price.value),
       description: event.target.description.value,
+      quantity: candy.quantity,
       id: candy.id
     });
   }
@@ -19,13 +20,13 @@ function EditCandyForm (props) {
       <form onSubmit={handleEditCandyFormSubmission}>
         <input
           type='text'
-          name='name'
+          name='candy'
           placeholder='Name' />
-        <input 
+        <input
           type='text'
-          name='description '
+          name='description'
           placeholder='' />
-        <input 
+        <input
           name='price'
           placeholder='Price per candy' />
         <button type='submit'>Submit</button>
